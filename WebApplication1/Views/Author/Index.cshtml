@@ -1,0 +1,30 @@
+﻿@using WebApplication1.Models
+@model IEnumerable<WebApplication1.Models.Author>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+
+<p>
+    @Html.Partial("CreatePartialView", new Author())
+</p>
+
+<div id="authorList">
+    @Html.Partial("AuthorPartialView")
+</div>
+
+<a onclick="Refresh()">Refresh</a>
+<script type="text/javascript">
+    function Refresh() {
+        $.ajax({
+            url: '@Url.Action("Index")',
+            method: "GET",
+            success: function (data) {
+                $("#authorList").html(data);
+            }
+        });
+    }
+</script>
